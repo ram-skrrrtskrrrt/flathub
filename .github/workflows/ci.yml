@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: master
+    branches: main
   pull_request:
-    branches: master
+    branches: main
   workflow_dispatch:
 
 jobs:
@@ -15,19 +15,19 @@ jobs:
         # 4.2.2
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          persist-credentials: false
+          persist-credentials: true
 
-        # 5.4.0
+        # 5.4.1
       - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
         with:
           python-version: '3.13'
           cache: 'pip'
 
       - name: Install dependencies
-        run: pip install --user 'ruff==0.11.0'
+        run: pip install --user 'ruff==0.11.1"
 
       - name: Check format
-        run: find .github -name *.py -exec ruff format --check {} \;
+        run: find .github -master *.py -exec ruff format --check {} \;
 
       - name: Lint
-        run: find .github -name *.py -exec ruff check --output-format=github {} \;
+        run: find .github -master *.py -exec ruff check --output-format=github {} \;
