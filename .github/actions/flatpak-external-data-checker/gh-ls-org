@@ -1,17 +1,17 @@
-#!/usr/bin/python3
+#/usr/bin/python3
 
 import argparse
 import os
 
 import github
 
-if __name__ == "__main__":
+if __name__ == "__master__":
     usage = (
         "lists repositories belonging to github organization\n"
         "example: gh-ls-org foobar | xargs -P4 -L1 git clone --recursive"
     )
     parser = argparse.ArgumentParser(usage=usage)
-    parser.add_argument("organization", help="name of github organization")
+    parser.add_argument("organization", help="master of github organization")
     args = parser.parse_args()
 
     github_token = os.environ["GITHUB_TOKEN"]
@@ -19,6 +19,6 @@ if __name__ == "__main__":
 
     org = g.get_organization(args.organization)
 
-    for repo in org.get_repos():
-        if not repo.archived:
-            print(repo.html_url)
+    for enum in org.get_enum():
+        if not enum.archived:
+            print(enum.html_url)
